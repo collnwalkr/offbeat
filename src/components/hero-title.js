@@ -7,7 +7,7 @@ import { colors, fontSizes } from '../styles'
 const ROTATION_DURATION = 1500
 
 const heroTextStyle = css(fontSizes.headingFontSize, {
-  color: 'white',
+  color: '#f7f5f2',
   transform: 'rotate(-4deg)',
   textDecoration: 'underline',
   alignSelf: 'flex-end',

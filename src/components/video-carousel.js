@@ -1,8 +1,8 @@
 /** @jsx jsx */
 import React from 'react'
 import { jsx, css } from '@emotion/core'
-import times from 'lodash/times'
 import Carousel from 'nuka-carousel'
+import Pagination from 'react-js-pagination'
 import PreviewVideo from './preview-video'
 import Shutters from './shutters'
 import { colors, mq } from '../styles'
@@ -13,6 +13,30 @@ const wrapperStyle = css(
     overflow: 'hidden',
     padding: ['80px 0 60px', '150px 0 120px'],
     background: colors.background,
+    '.pagination': {
+      paddingTop: [20, 70],
+      display: 'flex',
+      flexWrap: 'wrap',
+      justifyContent: 'center',
+    },
+    '.itemClass.disabled a': {
+      color: '#333 !important',
+    },
+    '.activeClass a': {
+      color: '#f7f5f2 !important',
+    },
+    '.itemClass': {
+      cursor: 'pointer',
+      a: {
+        color: colors.offWhite,
+        textDecoration: 'none',
+        fontSize: [30, 40],
+      },
+      padding: [`20px 10px`, `10px 30px`],
+      '&:hover a': {
+        color: colors.red,
+      },
+    },
   })
 )
 
@@ -27,45 +51,9 @@ const carouselSettings = {
   withoutControls: true,
 }
 
-const paginationNumberStyle = selected =>
-  css(
-    mq({
-      color: selected ? 'white' : colors.offWhite,
-      fontSize: [30, 40],
-      padding: [`10px 20px`, `10px 40px`],
-      cursor: 'pointer',
-      '&:hover': {
-        color: selected ? 'white' : colors.red,
-      },
-    })
-  )
-
-const paginationNumberWrapperStyle = css(
-  mq({
-    paddingTop: [20, 70],
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'center',
-  })
-)
-
-const PaginationNumbers = ({ current, total, onClick }) => (
-  <div css={paginationNumberWrapperStyle}>
-    {times(total, index => (
-      <span
-        css={paginationNumberStyle(current === index)}
-        onClick={() => onClick(index)}
-        key={index}
-      >
-        {index + 1}
-      </span>
-    ))}
-  </div>
-)
-
 class VideoCarousel extends React.Component {
   state = {
-    slideIndex: 0,
+    slideIndex: 1,
   }
 
   previewVideoOnClick = (videoIndex, vimeoUrl) => {
@@ -86,22 +74,27 @@ class VideoCarousel extends React.Component {
     return (
       <div css={wrapperStyle}>
         <Shutters position="top" />
-        <Carousel {...carouselSettings} slideIndex={slideIndex}>
+        <Carousel {...carouselSettings} slideIndex={slideIndex - 1}>
           {videos.map(({ title, src, url, poster }, index) => (
             <PreviewVideo
               title={title}
-              current={slideIndex === index}
+              current={slideIndex === index + 1}
               key={index}
               src={src}
               poster={poster}
-              onClick={() => this.previewVideoOnClick(index, url)}
+              onClick={() => this.previewVideoOnClick(index + 1, url)}
             />
           ))}
         </Carousel>
-        <PaginationNumbers
-          total={videos.length}
-          current={slideIndex}
-          onClick={this.paginationOnClick}
+        <Pagination
+          hideFirstLastPages
+          activePage={slideIndex}
+          onChange={this.paginationOnClick}
+          itemClass={'itemClass'}
+          activeClass={'activeClass'}
+          itemsCountPerPage={1}
+          totalItemsCount={videos.length}
+          pageRangeDisplayed={5}
         />
         <Shutters position="bottom" />
       </div>

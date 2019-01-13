@@ -22,7 +22,7 @@ const titleStyle = current =>
     mq({
       cursor: 'pointer',
       fontWeight: 'bold',
-      color: 'white',
+      color: '#f7f5f2',
       transition: '200ms ease opacity, transform 300ms, color 150ms',
       opacity: current ? 1 : 0,
       textTransform: 'uppercase',
@@ -36,12 +36,13 @@ const titleStyle = current =>
       height: 'auto',
       transform: `translateX(-50%) translateY(${current ? '0px' : '70px'})`,
       '&:hover': {
-        color: ['white', 'white', colors.red],
+        color: ['#f7f5f2', '#f7f5f2', colors.red],
       },
     })
   )
 
 const videoStyle = css({
+  background: 'black',
   position: 'absolute',
   opacity: 0.7,
   top: '50%',

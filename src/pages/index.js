@@ -37,7 +37,7 @@ class IndexPage extends React.Component {
         <div id="videos">
           <VideoCarousel
             openVideoPlayer={this.videoPlayerClick}
-            videos={videos}
+            videos={[...videos, ...videos]}
           />
         </div>
         <div style={{ height: '100vh', background: 'white' }} id="contact">

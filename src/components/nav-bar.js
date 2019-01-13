@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 /** @jsx jsx */
 import React from 'react'
 import { jsx, css } from '@emotion/core'
@@ -54,7 +55,7 @@ const linkStyle = showNavBarFully =>
       padding: ['5px 10px', '5px 10px', '10px 30px'],
       transform: 'rotate(-4deg)',
       transition: `transform ${TIMING}, color ${TIMING}`,
-      color: showNavBarFully ? 'black' : 'white',
+      color: showNavBarFully ? 'black' : '#f7f5f2',
       '&:hover': {
         color: colors.red,
         transform: 'rotate(-8deg)',
