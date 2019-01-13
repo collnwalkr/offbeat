@@ -20,7 +20,7 @@ class IndexPage extends React.Component {
 
   render() {
     const { videoPlayerOpen, videoPlayerURL } = this.state
-    const { words, videos } = getHomePageData(this.props.data)
+    const { words, videos, heroVideo } = getHomePageData(this.props.data)
     return (
       <Layout>
         <NavBar />
@@ -31,10 +31,7 @@ class IndexPage extends React.Component {
           />
         )}
         <Hero>
-          <HeroVideo
-            src={require('../static/videos/offbeat.mp4')}
-            poster={require('../static/images/offbeat-poster.png')}
-          />
+          <HeroVideo {...heroVideo} />
           <HeroTitle words={words}>{`video \n production house`}</HeroTitle>
         </Hero>
         <div id="videos">
@@ -66,6 +63,22 @@ export const homeQuery = graphql`
         }
       }
     }
+    allContentfulHeroVideo {
+      edges {
+        node {
+          video {
+            file {
+              url
+            }
+          }
+          poster {
+            file {
+              url
+            }
+          }
+        }
+      }
+    }
     allContentfulVideoCarousel {
       edges {
         node {
@@ -74,18 +87,13 @@ export const homeQuery = graphql`
             title
             vimeoLink
             videoMp4 {
-              id
               file {
                 url
-                fileName
-                contentType
               }
             }
             poster {
               file {
                 url
-                fileName
-                contentType
               }
             }
           }
