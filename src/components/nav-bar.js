@@ -3,7 +3,8 @@ import React from 'react'
 import { jsx, css } from '@emotion/core'
 import { mq, colors } from '../styles'
 import logo from '../static/images/logo.png'
-import logoDark from '../static/images/logo-dark.png'
+
+const TIMING = '150ms'
 
 const navBarStyle = showNavBarFully =>
   css(
@@ -17,7 +18,7 @@ const navBarStyle = showNavBarFully =>
       width: '100%',
       padding: [`10px 25px`, `20px 35px`, `20px 85px`],
       background: `rgba(248, 246, 244, ${showNavBarFully ? 1 : 0})`,
-      transition: 'background 150ms',
+      transition: `background ${TIMING}`,
     })
   )
 
@@ -29,18 +30,21 @@ const linkWrapper = css({
 const logoStyle = css({
   cursor: 'pointer',
   transform: 'rotate(-4deg)',
-  transition: 'transform 150ms, color 150ms',
+  transition: `transform ${TIMING}, color ${TIMING}`,
   '&:hover': {
     transform: 'rotate(-8deg)',
   },
   width: '100%',
 })
 
-const logoWrapperStyle = css(
-  mq({
-    width: [50, 80, 100],
-  })
-)
+const logoWrapperStyle = showNavBarFully =>
+  css(
+    mq({
+      transition: `filter ${TIMING}`,
+      filter: `invert(${showNavBarFully ? 1 : 0})`,
+      width: [50, 80, 100],
+    })
+  )
 
 const linkStyle = showNavBarFully =>
   css(
@@ -49,7 +53,7 @@ const linkStyle = showNavBarFully =>
       cursor: 'pointer',
       padding: ['5px 10px', '5px 10px', '10px 30px'],
       transform: 'rotate(-4deg)',
-      transition: 'transform 150ms, color 150ms',
+      transition: `transform ${TIMING}, color ${TIMING}`,
       color: showNavBarFully ? 'black' : 'white',
       '&:hover': {
         color: colors.red,
@@ -67,19 +71,18 @@ class Link extends React.Component {
     const element = document.getElementById(href.replace('#', ''))
     if (element) {
       const top = element.getBoundingClientRect().top + window.scrollY - 110
-      console.log('top', top)
       window.scrollTo({ top, behavior: 'smooth' })
       window.history.replaceState({}, '', href)
     }
   }
 
   render() {
-    const { href, children, showNavBarFully } = this.props
+    const { children, showNavBarFully } = this.props
     return (
       <a
         css={linkStyle(showNavBarFully)}
-        // href={href}
         onClick={this.scrollToRef}
+        // href={href}
       >
         {children}
       </a>
@@ -118,9 +121,10 @@ class NavBar extends React.Component {
     const { showNavBarFully } = this.state
     return (
       <div css={navBarStyle(showNavBarFully)}>
-        <div css={logoWrapperStyle}>
+        <div css={logoWrapperStyle(showNavBarFully)}>
           <img
-            src={showNavBarFully ? logoDark : logo}
+            alt="offbeat logo"
+            src={logo}
             css={logoStyle}
             onClick={this.handleLogoClick}
           />

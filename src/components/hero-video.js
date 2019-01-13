@@ -13,8 +13,18 @@ const videoStyle = css({
   transform: 'translateX(-50%) translateY(-50%)',
 })
 
-const HeroVideo = ({ src }) => (
-  <video css={videoStyle} width="100%" height="100%" autoPlay muted={true} loop>
+const HeroVideo = ({ src, poster }) => (
+  <video
+    css={videoStyle}
+    width="100%"
+    height="100%"
+    autoPlay={true}
+    muted={true}
+    loop
+    poster={poster}
+    controls={false}
+    playsInline
+  >
     <source src={src} type="video/mp4" />
   </video>
 )

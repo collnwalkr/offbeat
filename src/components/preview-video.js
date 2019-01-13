@@ -17,26 +17,29 @@ const videoWrapperStyle = css(
 )
 
 const titleStyle = current =>
-  css(fontSizes.headingFontSize, {
-    cursor: 'pointer',
-    fontWeight: 'bold',
-    color: 'white',
-    transition: '200ms ease opacity, transform 300ms',
-    opacity: current ? 1 : 0,
-    textTransform: 'uppercase',
-    textDecoration: 'underline',
-    zIndex: 100,
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    minWidth: '100%',
-    width: 'auto',
-    height: 'auto',
-    transform: `translateX(-50%) translateY(${current ? '0px' : '70px'})`,
-    '&:hover': {
-      color: colors.red,
-    },
-  })
+  css(
+    fontSizes.headingFontSize,
+    mq({
+      cursor: 'pointer',
+      fontWeight: 'bold',
+      color: 'white',
+      transition: '200ms ease opacity, transform 300ms, color 150ms',
+      opacity: current ? 1 : 0,
+      textTransform: 'uppercase',
+      textDecoration: 'underline',
+      zIndex: 100,
+      position: 'absolute',
+      top: '50%',
+      left: '50%',
+      minWidth: '100%',
+      width: 'auto',
+      height: 'auto',
+      transform: `translateX(-50%) translateY(${current ? '0px' : '70px'})`,
+      '&:hover': {
+        color: ['white', 'white', colors.red],
+      },
+    })
+  )
 
 const videoStyle = css({
   position: 'absolute',
@@ -82,7 +85,9 @@ class PreviewVideo extends React.Component {
             width="100%"
             height="100%"
             muted={true}
-            // poster={poster}
+            poster={poster}
+            controls={false}
+            playsInline
             loop
           >
             <source src={src} type="video/mp4" />

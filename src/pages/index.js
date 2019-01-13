@@ -1,19 +1,13 @@
 import React from 'react'
-import { Link } from 'gatsby'
 import Layout from '../components/layout'
 
 import NavBar from '../components/nav-bar'
-
 import Hero from '../components/hero'
 import HeroVideo from '../components/hero-video'
 import HeroTitle from '../components/hero-title'
-import sizzleReal from '../static/videos/test-vid.mp4'
-
-import logo from '../static/images/logo.png'
-
 import VideoCarousel from '../components/video-carousel'
-
 import VimeoPlayer from '../components/vimeo-player'
+import { getHomePageData } from '../utils/graphql'
 
 class IndexPage extends React.Component {
   state = {
@@ -26,7 +20,7 @@ class IndexPage extends React.Component {
 
   render() {
     const { videoPlayerOpen, videoPlayerURL } = this.state
-
+    const { words, videos } = getHomePageData(this.props.data)
     return (
       <Layout>
         <NavBar />
@@ -37,46 +31,16 @@ class IndexPage extends React.Component {
           />
         )}
         <Hero>
-          <HeroVideo src={sizzleReal} />
-          <HeroTitle words={['unexpected', 'brilliant', 'defiant']}>
-            {`video \n production house`}
-          </HeroTitle>
+          <HeroVideo
+            src={require('../static/videos/offbeat.mp4')}
+            poster={require('../static/images/offbeat-poster.png')}
+          />
+          <HeroTitle words={words}>{`video \n production house`}</HeroTitle>
         </Hero>
         <div id="videos">
           <VideoCarousel
             openVideoPlayer={this.videoPlayerClick}
-            videos={[
-              {
-                src: sizzleReal,
-                title: 'cool vid bro',
-                url: 'https://vimeo.com/286296762',
-                poster: logo,
-              },
-              {
-                src: sizzleReal,
-                title: 'hello there',
-                url: 'https://vimeo.com/286296762',
-                poster: logo,
-              },
-              {
-                src: sizzleReal,
-                title: 'hello long title',
-                url: 'https://vimeo.com/286296762',
-                poster: logo,
-              },
-              {
-                src: sizzleReal,
-                title: 'a video title',
-                url: 'https://vimeo.com/286296762',
-                poster: logo,
-              },
-              {
-                src: sizzleReal,
-                title: 'what up',
-                url: 'https://vimeo.com/286296762',
-                poster: logo,
-              },
-            ]}
+            videos={videos}
           />
         </div>
         <div style={{ height: '100vh', background: 'white' }} id="contact">
@@ -92,5 +56,43 @@ class IndexPage extends React.Component {
     )
   }
 }
+
+export const homeQuery = graphql`
+  query {
+    allContentfulRotatingWords {
+      edges {
+        node {
+          words
+        }
+      }
+    }
+    allContentfulVideoCarousel {
+      edges {
+        node {
+          name
+          videos {
+            title
+            vimeoLink
+            videoMp4 {
+              id
+              file {
+                url
+                fileName
+                contentType
+              }
+            }
+            poster {
+              file {
+                url
+                fileName
+                contentType
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`
 
 export default IndexPage

@@ -3,13 +3,12 @@ import React, { Fragment } from 'react'
 import ReactDOM from 'react-dom'
 import clamp from 'lodash/clamp'
 import { jsx, css } from '@emotion/core'
-import { colors, mq } from '../styles'
 
 const SHUTTER_HEIGHT = 70
 
 const multiples = [1.4, 1.2, 1]
 
-const COLORS = ['green', 'red', 'yellow']
+const COLORS = ['#1D1C1C', '#272626', '#353535']
 
 const shutterWrapper = ({ color, rotation, position }) =>
   css(

@@ -1,4 +1,3 @@
-import facepaint from 'facepaint'
 import mq from './media-queries'
 
 const headingFontSize = mq({
