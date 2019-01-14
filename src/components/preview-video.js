@@ -62,7 +62,7 @@ class PreviewVideo extends React.Component {
 
   shouldComponentUpdate = ({ current: nextCurrent }) => {
     const { current } = this.props
-    return current !== nextCurrent
+    return current !== nextCurrent || current
   }
 
   mouseLeave = () => {
