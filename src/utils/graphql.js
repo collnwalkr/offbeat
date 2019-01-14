@@ -17,11 +17,23 @@ const getHomePageData = data => {
     allContentfulHeroVideo: {
       edges: [{ node: heroVideo }],
     },
+    allContentfulAboutSection: {
+      edges: [
+        {
+          node: {
+            text: {
+              childContentfulRichText: { html: aboutHtml },
+            },
+          },
+        },
+      ],
+    },
   } = data
   return {
     words,
     videos: makeVideoSchema(videos),
     heroVideo: makeHeroVideoSchema(heroVideo),
+    aboutHtml,
   }
 }
 

@@ -22,7 +22,7 @@ const titleStyle = current =>
     mq({
       cursor: 'pointer',
       fontWeight: 'bold',
-      color: '#f7f5f2',
+      color: colors.cream,
       transition: '200ms ease opacity, transform 300ms, color 150ms',
       opacity: current ? 1 : 0,
       textTransform: 'uppercase',
@@ -34,9 +34,9 @@ const titleStyle = current =>
       minWidth: '100%',
       width: 'auto',
       height: 'auto',
-      transform: `translateX(-50%) translateY(${current ? '0px' : '70px'})`,
+      transform: `translateX(-50%)`,
       '&:hover': {
-        color: ['#f7f5f2', '#f7f5f2', colors.red],
+        color: [colors.cream, colors.cream, colors.red],
       },
     })
   )
@@ -58,6 +58,11 @@ class PreviewVideo extends React.Component {
     if (!current) {
       this.video.play()
     }
+  }
+
+  shouldComponentUpdate = ({ current: nextCurrent }) => {
+    const { current } = this.props
+    return current !== nextCurrent
   }
 
   mouseLeave = () => {

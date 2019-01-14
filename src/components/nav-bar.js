@@ -17,8 +17,9 @@ const navBarStyle = showNavBarFully =>
       display: 'flex',
       justifyContent: 'space-between',
       width: '100%',
-      padding: [`10px 25px`, `20px 35px`, `20px 85px`],
-      background: `rgba(248, 246, 244, ${showNavBarFully ? 1 : 0})`,
+      padding: [`10px 25px`, `15px 35px`, `15px 85px`],
+      // background: `rgba(248, 246, 244, ${showNavBarFully ? 1 : 0})`,
+      background: `rgba(0, 9, 9, ${showNavBarFully ? 1 : 0})`,
       transition: `background ${TIMING}`,
     })
   )
@@ -42,7 +43,7 @@ const logoWrapperStyle = showNavBarFully =>
   css(
     mq({
       transition: `filter ${TIMING}`,
-      filter: `invert(${showNavBarFully ? 1 : 0})`,
+      // filter: `invert(${showNavBarFully ? 1 : 0})`,
       width: [50, 80, 100],
     })
   )
@@ -55,14 +56,15 @@ const linkStyle = showNavBarFully =>
       padding: ['5px 10px', '5px 10px', '10px 30px'],
       transform: 'rotate(-4deg)',
       transition: `transform ${TIMING}, color ${TIMING}`,
-      color: showNavBarFully ? 'black' : '#f7f5f2',
+      // color: showNavBarFully ? 'black' : colors.cream,
+      color: colors.cream,
       '&:hover': {
         color: colors.red,
         transform: 'rotate(-8deg)',
       },
       fontFamily: 'Helvetica',
       fontWeight: 'bold',
-      fontSize: [12, 18],
+      fontSize: [14, 18],
     })
   )
 
@@ -80,11 +82,7 @@ class Link extends React.Component {
   render() {
     const { children, showNavBarFully } = this.props
     return (
-      <a
-        css={linkStyle(showNavBarFully)}
-        onClick={this.scrollToRef}
-        // href={href}
-      >
+      <a css={linkStyle(showNavBarFully)} onClick={this.scrollToRef}>
         {children}
       </a>
     )
@@ -100,9 +98,9 @@ class NavBar extends React.Component {
     requestAnimationFrame(() => {
       const { scrollY } = window
       const { showNavBarFully } = this.state
-      if (scrollY > 40 && !showNavBarFully) {
+      if (scrollY > 200 && !showNavBarFully) {
         this.setState({ showNavBarFully: true })
-      } else if (scrollY < 40 && showNavBarFully) {
+      } else if (scrollY < 200 && showNavBarFully) {
         this.setState({ showNavBarFully: false })
       }
     })
@@ -137,7 +135,6 @@ class NavBar extends React.Component {
           <Link showNavBarFully={showNavBarFully} href="#contact">
             Contact
           </Link>
-          <Link showNavBarFully={showNavBarFully}>About</Link>
         </div>
       </div>
     )

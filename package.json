@@ -5,6 +5,7 @@
   "version": "1.0.0",
   "author": "Collin Walker",
   "dependencies": {
+    "@contentful/gatsby-transformer-contentful-richtext": "^12.1.2",
     "@emotion/core": "^10.0.0",
     "browser-monads": "^1.0.0",
     "facepaint": "^1.2.1",

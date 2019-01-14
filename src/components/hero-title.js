@@ -4,10 +4,10 @@ import { document, exists } from 'browser-monads'
 import { jsx, css } from '@emotion/core'
 import { colors, fontSizes } from '../styles'
 
-const ROTATION_DURATION = 1500
+const ROTATION_DURATION = 2000
 
 const heroTextStyle = css(fontSizes.headingFontSize, {
-  color: '#f7f5f2',
+  color: colors.cream,
   transform: 'rotate(-4deg)',
   textDecoration: 'underline',
   alignSelf: 'flex-end',

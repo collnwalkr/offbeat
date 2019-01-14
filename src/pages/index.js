@@ -7,6 +7,7 @@ import HeroVideo from '../components/hero-video'
 import HeroTitle from '../components/hero-title'
 import VideoCarousel from '../components/video-carousel'
 import VimeoPlayer from '../components/vimeo-player'
+import Footer from '../components/footer'
 import { getHomePageData } from '../utils/graphql'
 
 class IndexPage extends React.Component {
@@ -20,7 +21,9 @@ class IndexPage extends React.Component {
 
   render() {
     const { videoPlayerOpen, videoPlayerURL } = this.state
-    const { words, videos, heroVideo } = getHomePageData(this.props.data)
+    const { words, videos, heroVideo, aboutHtml } = getHomePageData(
+      this.props.data
+    )
     return (
       <Layout>
         <NavBar />
@@ -32,22 +35,16 @@ class IndexPage extends React.Component {
         )}
         <Hero>
           <HeroVideo {...heroVideo} />
-          <HeroTitle words={words}>{`video \n production house`}</HeroTitle>
+          <HeroTitle words={words}>{`video \n moments`}</HeroTitle>
         </Hero>
         <div id="videos">
           <VideoCarousel
             openVideoPlayer={this.videoPlayerClick}
-            videos={[...videos, ...videos]}
+            videos={videos}
           />
         </div>
-        <div style={{ height: '100vh', background: 'white' }} id="contact">
-          <p>
-            Life is built with stories and experiences. Offbeat is here to help
-            you tell your story. Whether you're a small business, a local
-            non-profit, a large corporation or even just an inspiring story,
-            Offbeat wants your voice to be heard. Read more
-          </p>
-          <p>(214) 914-9175 info@offbeatseattle.com</p>
+        <div id="contact">
+          <Footer aboutHtml={aboutHtml} />
         </div>
       </Layout>
     )
@@ -75,6 +72,18 @@ export const homeQuery = graphql`
             file {
               url
             }
+          }
+        }
+      }
+    }
+    allContentfulAboutSection {
+      edges {
+        node {
+          text {
+            childContentfulRichText {
+              html
+            }
+            id
           }
         }
       }

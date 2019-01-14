@@ -23,7 +23,7 @@ const wrapperStyle = css(
       color: '#333 !important',
     },
     '.activeClass a': {
-      color: '#f7f5f2 !important',
+      color: `${colors.cream} !important`,
     },
     '.itemClass': {
       cursor: 'pointer',
