@@ -73,7 +73,7 @@ class Link extends React.Component {
     const { href = '' } = this.props
     const element = document.getElementById(href.replace('#', ''))
     if (element) {
-      const top = element.getBoundingClientRect().top + window.scrollY - 110
+      const top = element.getBoundingClientRect().top + window.scrollY - 60
       window.scrollTo({ top, behavior: 'smooth' })
       window.history.replaceState({}, '', href)
     }
