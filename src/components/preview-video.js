@@ -44,12 +44,21 @@ const titleStyle = current =>
 const videoStyle = css({
   background: 'black',
   position: 'absolute',
-  opacity: 0.7,
   top: '50%',
   left: '50%',
   height: '100%',
   width: 'auto',
   transform: 'translateX(-50%) translateY(-50%)',
+})
+
+const overlayStyle = css({
+  position: 'absolute',
+  top: 0,
+  left: 0,
+  width: '100%',
+  height: '100%',
+  background: colors.background,
+  opacity: 0.3,
 })
 
 class PreviewVideo extends React.Component {
@@ -98,6 +107,7 @@ class PreviewVideo extends React.Component {
           >
             <source src={src} type="video/mp4" />
           </video>
+          <div css={overlayStyle} />
         </div>
       </div>
     )

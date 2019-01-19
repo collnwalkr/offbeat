@@ -24,6 +24,7 @@ const getHomePageData = data => {
             text: {
               childContentfulRichText: { html: aboutHtml },
             },
+            aboutImages,
           },
         },
       ],
@@ -31,11 +32,17 @@ const getHomePageData = data => {
   } = data
   return {
     words,
+    aboutImages: makeImagesScheme(aboutImages),
     videos: makeVideoSchema(videos),
     heroVideo: makeHeroVideoSchema(heroVideo),
     aboutHtml,
   }
 }
+
+const makeImagesScheme = images =>
+  images.map(({ resize: { src } }) => ({
+    src: `https:${src}`,
+  }))
 
 const makeHeroVideoSchema = ({ video, poster }) => ({
   src: `https:${video.file.url}`,

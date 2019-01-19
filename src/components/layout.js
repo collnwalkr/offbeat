@@ -3,7 +3,10 @@ import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import { StaticQuery, graphql } from 'gatsby'
 import { Global } from '@emotion/core'
+import objectFitImages from 'object-fit-images'
 import 'reset-css'
+
+objectFitImages()
 
 const Layout = ({ children }) => (
   <StaticQuery

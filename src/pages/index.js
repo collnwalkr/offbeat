@@ -21,9 +21,14 @@ class IndexPage extends React.Component {
 
   render() {
     const { videoPlayerOpen, videoPlayerURL } = this.state
-    const { words, videos, heroVideo, aboutHtml } = getHomePageData(
-      this.props.data
-    )
+    const {
+      words,
+      videos,
+      heroVideo,
+      aboutHtml,
+      aboutImages,
+    } = getHomePageData(this.props.data)
+
     return (
       <Layout>
         <NavBar />
@@ -44,7 +49,7 @@ class IndexPage extends React.Component {
           />
         </div>
         <div id="contact">
-          <Footer aboutHtml={aboutHtml} />
+          <Footer aboutHtml={aboutHtml} images={aboutImages} />
         </div>
       </Layout>
     )
@@ -83,7 +88,11 @@ export const homeQuery = graphql`
             childContentfulRichText {
               html
             }
-            id
+          }
+          aboutImages {
+            resize(width: 2000) {
+              src
+            }
           }
         }
       }

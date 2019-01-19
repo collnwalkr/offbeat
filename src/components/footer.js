@@ -4,6 +4,7 @@ import { mq, colors } from '../styles'
 import logo from '../static/images/logo.png'
 
 const TIMING = '150ms'
+const GUTTER = 30
 
 const footerWrapperStyle = css(
   mq({
@@ -11,12 +12,6 @@ const footerWrapperStyle = css(
     background: colors.cream,
   })
 )
-
-const flex = css({
-  maxWidth: 1200,
-  margin: 'auto',
-  display: 'flex',
-})
 
 const logoStyle = css({
   transition: `transform ${TIMING}, color ${TIMING}`,
@@ -26,34 +21,57 @@ const logoStyle = css({
   },
 })
 
-const logoWrapperStyle = css({
-  padding: `90px 0px`,
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-})
+const logoWrapperStyle = css(
+  mq({
+    padding: [`30px 0px`, `10px 50px`, `130px 0px`],
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  })
+)
 
-const leftWrapper = css({
-  marginRight: 15,
-  flex: 1,
-})
+const flex = css(
+  mq({
+    maxWidth: 1200,
+    margin: 'auto',
+    display: 'flex',
+    flexWrap: 'wrap',
+    flexDirection: ['column-reverse', 'column-reverse', 'row'],
+  })
+)
 
-const rightWrapper = css({
-  marginRight: 15,
-  flex: 2,
-})
+const leftWrapper = css(
+  mq({
+    display: 'flex',
+    flexDirection: ['column', 'row-reverse', 'column'],
+    marginRight: [0, 0, GUTTER],
+    marginTop: [0, GUTTER, 0],
+    flex: 3,
+    flexBasis: ['100%', '100%', 0],
+  })
+)
+
+const rightWrapper = css(
+  mq({
+    marginRight: [0, 0, GUTTER],
+    flex: 5,
+  })
+)
 
 const imagePlaceholder = height =>
-  css({
-    height,
-    width: '100%',
-    maxWidth: 900,
-    background: '#333',
-  })
+  css(
+    mq({
+      height: ['inherit', 'inherit', height],
+      width: '100%',
+      maxWidth: 800,
+      marginBottom: [GUTTER, GUTTER, 0],
+    })
+  )
 
 const aboutSectionStyle = css({
   fontSize: 20,
   lineHeight: 1.4,
+  color: colors.background,
   'p:first-child': {
     marginTop: 40,
   },
@@ -66,19 +84,40 @@ const aboutSectionStyle = css({
   b: {
     fontWeight: 'bold',
   },
+  a: {
+    color: colors.background,
+    fontWeight: 'normal',
+  },
 })
 
-const Footer = ({ aboutHtml }) => (
+const aboutImageStyle = css({
+  width: '100%',
+  height: '100%',
+  objectFit: 'cover',
+  fontFamily: 'object-fit: contain;',
+})
+
+const topFlexStyle = css(
+  mq({
+    marginBottom: [0, 0, GUTTER],
+  })
+)
+
+const Footer = ({ aboutHtml, images }) => (
   <div css={footerWrapperStyle}>
-    <div css={css(flex, { marginBottom: 15 })}>
+    <div css={css(flex, topFlexStyle)}>
       <div css={leftWrapper}>
         <div css={logoWrapperStyle}>
           <img alt="offbeat logo" src={logo} css={logoStyle} />
         </div>
-        <div css={imagePlaceholder(400)} />
+        <div css={imagePlaceholder(400)}>
+          <img src={images[1].src} css={aboutImageStyle} />
+        </div>
       </div>
       <div css={rightWrapper}>
-        <div css={imagePlaceholder(300)} />
+        <div css={imagePlaceholder(350)}>
+          <img src={images[0].src} css={aboutImageStyle} />
+        </div>
         <div
           dangerouslySetInnerHTML={{ __html: aboutHtml }}
           css={aboutSectionStyle}
@@ -86,7 +125,9 @@ const Footer = ({ aboutHtml }) => (
       </div>
     </div>
     <div css={flex}>
-      <div css={imagePlaceholder(300)} />
+      <div css={imagePlaceholder(400)}>
+        <img src={images[2].src} css={aboutImageStyle} />
+      </div>
     </div>
   </div>
 )
