@@ -103,32 +103,41 @@ const topFlexStyle = css(
   })
 )
 
+const bottomFooterStyle = css({
+  width: '100%',
+  height: 40,
+  background: colors.background,
+})
+
 const Footer = ({ aboutHtml, images }) => (
-  <div css={footerWrapperStyle}>
-    <div css={css(flex, topFlexStyle)}>
-      <div css={leftWrapper}>
-        <div css={logoWrapperStyle}>
-          <img alt="offbeat logo" src={logo} css={logoStyle} />
+  <div>
+    <div css={footerWrapperStyle}>
+      <div css={css(flex, topFlexStyle)}>
+        <div css={leftWrapper}>
+          <div css={logoWrapperStyle}>
+            <img alt="offbeat logo" src={logo} css={logoStyle} />
+          </div>
+          <div css={imagePlaceholder(400)}>
+            <img src={images[1].src} css={aboutImageStyle} />
+          </div>
         </div>
+        <div css={rightWrapper}>
+          <div css={imagePlaceholder(350)}>
+            <img src={images[0].src} css={aboutImageStyle} />
+          </div>
+          <div
+            dangerouslySetInnerHTML={{ __html: aboutHtml }}
+            css={aboutSectionStyle}
+          />
+        </div>
+      </div>
+      <div css={flex}>
         <div css={imagePlaceholder(400)}>
-          <img src={images[1].src} css={aboutImageStyle} />
+          <img src={images[2].src} css={aboutImageStyle} />
         </div>
       </div>
-      <div css={rightWrapper}>
-        <div css={imagePlaceholder(350)}>
-          <img src={images[0].src} css={aboutImageStyle} />
-        </div>
-        <div
-          dangerouslySetInnerHTML={{ __html: aboutHtml }}
-          css={aboutSectionStyle}
-        />
-      </div>
     </div>
-    <div css={flex}>
-      <div css={imagePlaceholder(400)}>
-        <img src={images[2].src} css={aboutImageStyle} />
-      </div>
-    </div>
+    <div css={bottomFooterStyle} />
   </div>
 )
 
