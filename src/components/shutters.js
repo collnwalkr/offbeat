@@ -14,6 +14,11 @@ const darken = (hex, multiple = 0.5) =>
     .darken(multiple)
     .hex()
 
+const lighten = (hex, multiple = 0.5) =>
+  Color(hex)
+    .lighten(multiple)
+    .hex()
+
 const COLORS = ['#1D1C1C', '#272626', '#353535']
 
 const shutterWrapper = ({ color, rotation, position }) =>
@@ -87,18 +92,21 @@ class Shutters extends React.Component {
       <Fragment>
         <Shutter
           position={position}
-          color={darken(currentColor, 0.2)}
+          // color={darken(currentColor, 0.2)}
+          color={lighten(currentColor, 0.4)}
           rotation={rotations[0]}
           ref={element => (this.shutter = element)}
         />
         <Shutter
           position={position}
-          color={darken(currentColor, 0.4)}
+          // color={darken(currentColor, 0.4)}
+          color={lighten(currentColor, 0.8)}
           rotation={rotations[1]}
         />
         <Shutter
           position={position}
-          color={darken(currentColor, 0.6)}
+          // color={darken(currentColor, 0.6)}
+          color={lighten(currentColor, 1)}
           rotation={rotations[2]}
         />
       </Fragment>
