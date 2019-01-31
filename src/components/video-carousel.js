@@ -73,12 +73,11 @@ class VideoCarousel extends React.Component {
   render() {
     const { slideIndex } = this.state
     const { videos } = this.props
-    const currentVideo = videos[slideIndex - 1]
+    const currentColor =
+      videos[slideIndex - 1].backgroundColor || colors.background
     return (
-      <div
-        css={wrapperStyle(currentVideo.backgroundColor || colors.background)}
-      >
-        <Shutters position="top" />
+      <div css={wrapperStyle(currentColor)}>
+        <Shutters position="top" currentColor={currentColor} />
         <Carousel {...carouselSettings} slideIndex={slideIndex - 1}>
           {videos.map(({ title, src, url, poster }, index) => (
             <PreviewVideo
@@ -101,7 +100,7 @@ class VideoCarousel extends React.Component {
           totalItemsCount={videos.length}
           pageRangeDisplayed={5}
         />
-        <Shutters position="bottom" />
+        <Shutters position="bottom" currentColor={currentColor} />
       </div>
     )
   }

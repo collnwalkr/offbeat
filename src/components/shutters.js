@@ -2,11 +2,17 @@
 import React, { Fragment } from 'react'
 import ReactDOM from 'react-dom'
 import clamp from 'lodash/clamp'
+import Color from 'color'
 import { jsx, css } from '@emotion/core'
 
 const SHUTTER_HEIGHT = 70
 
 const multiples = [1.4, 1.2, 1]
+
+const darken = (hex, multiple = 0.5) =>
+  Color(hex)
+    .darken(multiple)
+    .hex()
 
 const COLORS = ['#1D1C1C', '#272626', '#353535']
 
@@ -15,7 +21,7 @@ const shutterWrapper = ({ color, rotation, position }) =>
     {
       position: 'absolute',
       transform: `rotate(${rotation}deg)`,
-      transition: 'transform 150ms',
+      transition: 'transform 150ms, background 200ms',
       width: '110%',
       height: SHUTTER_HEIGHT,
       background: color,
@@ -76,23 +82,23 @@ class Shutters extends React.Component {
 
   render() {
     const { rotations } = this.state
-    const { position } = this.props
+    const { position, currentColor } = this.props
     return (
       <Fragment>
         <Shutter
           position={position}
-          color={COLORS[0]}
+          color={darken(currentColor, 0.2)}
           rotation={rotations[0]}
           ref={element => (this.shutter = element)}
         />
         <Shutter
           position={position}
-          color={COLORS[1]}
+          color={darken(currentColor, 0.4)}
           rotation={rotations[1]}
         />
         <Shutter
           position={position}
-          color={COLORS[2]}
+          color={darken(currentColor, 0.6)}
           rotation={rotations[2]}
         />
       </Fragment>
