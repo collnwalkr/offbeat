@@ -7,38 +7,40 @@ import PreviewVideo from './preview-video'
 import Shutters from './shutters'
 import { colors, mq } from '../styles'
 
-const wrapperStyle = css(
-  mq({
-    position: 'relative',
-    overflow: 'hidden',
-    padding: ['80px 0 60px', '150px 0 120px'],
-    background: colors.background,
-    '.pagination': {
-      paddingTop: [20, 70],
-      display: 'flex',
-      flexWrap: 'wrap',
-      justifyContent: 'center',
-    },
-    '.itemClass.disabled a': {
-      color: '#333 !important',
-    },
-    '.activeClass a': {
-      color: `${colors.cream} !important`,
-    },
-    '.itemClass': {
-      cursor: 'pointer',
-      a: {
-        color: colors.offWhite,
-        textDecoration: 'none',
-        fontSize: [30, 40],
+const wrapperStyle = background =>
+  css(
+    mq({
+      position: 'relative',
+      overflow: 'hidden',
+      padding: ['80px 0 60px', '150px 0 120px'],
+      transition: 'background 200ms',
+      background,
+      '.pagination': {
+        paddingTop: [20, 70],
+        display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent: 'center',
       },
-      padding: [`20px 10px`, `10px 30px`],
-      '&:hover a': {
-        color: colors.red,
+      '.itemClass.disabled a': {
+        color: '#333 !important',
       },
-    },
-  })
-)
+      '.activeClass a': {
+        color: `${colors.cream} !important`,
+      },
+      '.itemClass': {
+        cursor: 'pointer',
+        a: {
+          color: colors.offWhite,
+          textDecoration: 'none',
+          fontSize: [30, 40],
+        },
+        padding: [`20px 10px`, `10px 30px`],
+        '&:hover a': {
+          color: colors.red,
+        },
+      },
+    })
+  )
 
 const carouselSettings = {
   slidesToShow: 2,
@@ -71,8 +73,11 @@ class VideoCarousel extends React.Component {
   render() {
     const { slideIndex } = this.state
     const { videos } = this.props
+    const currentVideo = videos[slideIndex - 1]
     return (
-      <div css={wrapperStyle}>
+      <div
+        css={wrapperStyle(currentVideo.backgroundColor || colors.background)}
+      >
         <Shutters position="top" />
         <Carousel {...carouselSettings} slideIndex={slideIndex - 1}>
           {videos.map(({ title, src, url, poster }, index) => (

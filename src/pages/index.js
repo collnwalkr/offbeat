@@ -104,6 +104,7 @@ export const homeQuery = graphql`
           videos {
             title
             vimeoLink
+            backgroundColor
             videoMp4 {
               file {
                 url

@@ -3,7 +3,6 @@ import { jsx, css } from '@emotion/core'
 import { colors } from '../styles'
 
 const videoStyle = css({
-  // opacity: 0.6,
   position: 'absolute',
   top: '50%',
   left: '50%',

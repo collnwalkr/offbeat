@@ -30,6 +30,7 @@ const getHomePageData = data => {
       ],
     },
   } = data
+  console.log('videos', videos)
   return {
     words,
     aboutImages: makeImagesScheme(aboutImages),
@@ -50,10 +51,11 @@ const makeHeroVideoSchema = ({ video, poster }) => ({
 })
 
 const makeVideoSchema = videos =>
-  videos.map(({ videoMp4, title, poster, vimeoLink }) => {
+  videos.map(({ videoMp4, title, poster, vimeoLink, backgroundColor }) => {
     return {
       src: `https:${videoMp4.file.url}`,
-      title: title,
+      title,
+      backgroundColor,
       poster: `https:${poster.file.url}`,
       url: vimeoLink,
     }
