@@ -15,6 +15,7 @@ const footerWrapperStyle = css(
 
 const logoStyle = css({
   transition: `transform ${TIMING}, color ${TIMING}`,
+  maxWidth: 220,
   filter: `invert(1)`,
   '&:hover': {
     transform: 'rotate(-8deg)',

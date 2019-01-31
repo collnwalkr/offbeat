@@ -4,6 +4,7 @@ import Helmet from 'react-helmet'
 import { StaticQuery, graphql } from 'gatsby'
 import { Global } from '@emotion/core'
 import objectFitImages from 'object-fit-images'
+import favicon from '../static/images/favicon.png'
 import 'reset-css'
 
 objectFitImages()
@@ -26,6 +27,9 @@ const Layout = ({ children }) => (
           meta={[
             { name: 'description', content: 'Sample' },
             { name: 'keywords', content: 'sample, something' },
+          ]}
+          link={[
+            { rel: 'shortcut icon', type: 'image/png', href: `${favicon}` },
           ]}
         >
           <html lang="en" />
