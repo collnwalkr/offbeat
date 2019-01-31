@@ -30,7 +30,6 @@ const getHomePageData = data => {
       ],
     },
   } = data
-  console.log('videos', videos)
   return {
     words,
     aboutImages: makeImagesScheme(aboutImages),
