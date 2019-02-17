@@ -67,13 +67,13 @@ class HeroTitle extends React.Component {
   }
 
   render() {
-    const { children } = this.props
+    const { endPhrase } = this.props
     const { currentWord, currentWordWidth } = this.state
 
     return (
       <h2 css={heroTextStyle}>
         <span css={rotatingTextStyle(currentWordWidth)}>{currentWord}</span>{' '}
-        {children}
+        {endPhrase.join('\n')}
       </h2>
     )
   }

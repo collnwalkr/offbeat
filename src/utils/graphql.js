@@ -3,7 +3,12 @@ const getHomePageData = data => {
     allContentfulRotatingWords: {
       edges: [
         {
-          node: { words },
+          node: {
+            words,
+            endPhrase: {
+              childContentfulRichText: { html: endPhrase },
+            },
+          },
         },
       ],
     },
@@ -35,8 +40,22 @@ const getHomePageData = data => {
     aboutImages: makeImagesScheme(aboutImages),
     videos: makeVideoSchema(videos),
     heroVideo: makeHeroVideoSchema(heroVideo),
+    endPhrase: deHTMLEndPhrase(endPhrase),
     aboutHtml,
   }
+}
+
+const deHTMLEndPhrase = html => {
+  const regex = /<p>([\w\W]+?)<\/p>/g
+  let endWords = []
+  let m
+  do {
+    m = regex.exec(html)
+    if (m) {
+      endWords.push(m[1])
+    }
+  } while (m)
+  return endWords
 }
 
 const makeImagesScheme = images =>

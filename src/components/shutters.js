@@ -9,17 +9,15 @@ const SHUTTER_HEIGHT = 70
 
 const multiples = [1.4, 1.2, 1]
 
-const darken = (hex, multiple = 0.5) =>
-  Color(hex)
-    .darken(multiple)
-    .hex()
+// const darken = (hex, multiple = 0.5) =>
+//   Color(hex)
+//     .darken(multiple)
+//     .hex()
 
 const lighten = (hex, multiple = 0.5) =>
   Color(hex)
     .lighten(multiple)
     .hex()
-
-const COLORS = ['#1D1C1C', '#272626', '#353535']
 
 const shutterWrapper = ({ color, rotation, position }) =>
   css(

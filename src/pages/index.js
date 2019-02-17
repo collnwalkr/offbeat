@@ -27,6 +27,7 @@ class IndexPage extends React.Component {
       heroVideo,
       aboutHtml,
       aboutImages,
+      endPhrase,
     } = getHomePageData(this.props.data)
 
     return (
@@ -40,7 +41,7 @@ class IndexPage extends React.Component {
         )}
         <Hero>
           <HeroVideo {...heroVideo} />
-          <HeroTitle words={words}>{`video \n moments`}</HeroTitle>
+          <HeroTitle words={words} endPhrase={endPhrase} />
         </Hero>
         <div id="videos">
           <VideoCarousel
@@ -62,6 +63,11 @@ export const homeQuery = graphql`
       edges {
         node {
           words
+          endPhrase {
+            childContentfulRichText {
+              html
+            }
+          }
         }
       }
     }
