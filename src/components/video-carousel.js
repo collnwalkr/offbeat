@@ -16,8 +16,8 @@ const wrapperStyle = background =>
       transition: 'background 200ms',
       background,
       '.slider': {
-        marginLeft: '-20%',
-        width: '140% !important',
+        marginLeft: '25%',
+        width: '50% !important',
       },
       '& .slider-frame': {
         overflow: 'visible !important',
@@ -103,10 +103,11 @@ class VideoCarousel extends React.Component {
       <div css={wrapperStyle(currentColor)}>
         <Shutters position="top" currentColor={currentColor} />
         <Carousel
+          scrollMode="page"
           ref={el => (this.carousel = el)}
           slideIndex={slideIndex}
           afterSlide={slideIndex => this.setState({ slideIndex })}
-          slidesToShow={3}
+          // slidesToShow={3}
           cellAlign="center"
           cellSpacing={20}
           withoutControls
