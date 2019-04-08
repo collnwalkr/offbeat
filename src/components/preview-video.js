@@ -7,7 +7,7 @@ const videoWrapperStyle = css(
   mq({
     position: 'relative',
     height: [250, 350, 300, 400],
-    width: [150, 250, 400, 500],
+    width: '100%',
     margin: 'auto',
     boxSizing: 'border-box',
     background: 'black',
@@ -91,6 +91,7 @@ class PreviewVideo extends React.Component {
         onClick={onClick}
         onMouseEnter={this.mouseEnter}
         onMouseLeave={this.mouseLeave}
+        width="100%"
       >
         <h3 css={titleStyle(current)}>{title}</h3>
         <div css={videoWrapperStyle}>

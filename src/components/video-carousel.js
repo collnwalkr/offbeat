@@ -15,6 +15,23 @@ const wrapperStyle = background =>
       padding: ['80px 0 60px', '150px 0 120px'],
       transition: 'background 200ms',
       background,
+      '.slider': {
+        marginLeft: '-20%',
+        width: '140% !important',
+      },
+      '& .slider-frame': {
+        overflow: 'visible !important',
+      },
+      '& .slide-visible.slider-slide': {
+        zIndex: '100 !important',
+      },
+      '.slide-visible ~ .slide-visible': {
+        zIndex: '0 !important',
+      },
+      '& .slider-slide': {
+        paddingLeft: [5, 2, 40, 50],
+        paddingRight: [5, 2, 40, 50],
+      },
       '.pagination': {
         paddingTop: [20, 70],
         display: 'flex',
@@ -55,7 +72,7 @@ const carouselSettings = {
 
 class VideoCarousel extends React.Component {
   state = {
-    slideIndex: 1,
+    slideIndex: 0,
   }
 
   previewVideoOnClick = (videoIndex, vimeoUrl) => {
@@ -63,36 +80,51 @@ class VideoCarousel extends React.Component {
     if (videoIndex === slideIndex) {
       this.props.openVideoPlayer(vimeoUrl)
     }
-    this.setState({
-      slideIndex: videoIndex,
-    })
+    this.setState(
+      {
+        slideIndex: videoIndex,
+      },
+      () => {
+        if (this.carousel) {
+          this.carousel.state.currentSlide = videoIndex
+        }
+      }
+    )
   }
 
-  paginationOnClick = slideIndex => this.setState({ slideIndex })
+  paginationOnClick = slideIndex =>
+    this.setState({ slideIndex: slideIndex - 1 })
 
   render() {
     const { slideIndex } = this.state
     const { videos } = this.props
-    const currentColor =
-      videos[slideIndex - 1].backgroundColor || colors.background
+    const currentColor = videos[slideIndex].backgroundColor || colors.background
     return (
       <div css={wrapperStyle(currentColor)}>
         <Shutters position="top" currentColor={currentColor} />
-        <Carousel {...carouselSettings} slideIndex={slideIndex - 1}>
+        <Carousel
+          ref={el => (this.carousel = el)}
+          slideIndex={slideIndex}
+          afterSlide={slideIndex => this.setState({ slideIndex })}
+          slidesToShow={3}
+          cellAlign="center"
+          cellSpacing={20}
+          withoutControls
+        >
           {videos.map(({ title, src, url, poster }, index) => (
             <PreviewVideo
               title={title}
-              current={slideIndex === index + 1}
+              current={slideIndex === index}
               key={index}
               src={src}
               poster={poster}
-              onClick={() => this.previewVideoOnClick(index + 1, url)}
+              onClick={() => this.previewVideoOnClick(index, url)}
             />
           ))}
         </Carousel>
         <Pagination
           hideFirstLastPages
-          activePage={slideIndex}
+          activePage={slideIndex + 1}
           onChange={this.paginationOnClick}
           itemClass={'itemClass'}
           activeClass={'activeClass'}
