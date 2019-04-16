@@ -107,7 +107,6 @@ class VideoCarousel extends React.Component {
           ref={el => (this.carousel = el)}
           slideIndex={slideIndex}
           afterSlide={slideIndex => this.setState({ slideIndex })}
-          // slidesToShow={3}
           cellAlign="center"
           cellSpacing={20}
           withoutControls
