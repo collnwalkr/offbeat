@@ -20,7 +20,7 @@ const overlayStyle = css({
   width: '100%',
   height: '100%',
   background: colors.background,
-  opacity: 0.3,
+  opacity: 0.18,
 })
 
 const HeroVideo = ({ src, poster }) => (

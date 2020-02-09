@@ -59,17 +59,6 @@ const wrapperStyle = background =>
     })
   )
 
-const carouselSettings = {
-  slidesToShow: 2,
-  slidesToScroll: 1,
-  cellAlign: 'center',
-  edge: 'ease',
-  speed: 300,
-  swiping: false,
-  dragging: false,
-  withoutControls: true,
-}
-
 class VideoCarousel extends React.Component {
   state = {
     slideIndex: 0,
