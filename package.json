@@ -19,7 +19,7 @@
     "gatsby-source-contentful": "^2.0.26",
     "gatsby-source-filesystem": "^2.0.8",
     "gatsby-transformer-sharp": "^2.1.8",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.19",
     "nuka-carousel": "^4.5.3",
     "object-fit-images": "^3.2.4",
     "react": "^16.6.3",
