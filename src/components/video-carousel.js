@@ -15,10 +15,6 @@ const wrapperStyle = background =>
       padding: ['80px 0 60px', '150px 0 120px'],
       transition: 'background 200ms',
       background,
-      '.slider': {
-        marginLeft: '25%',
-        width: '50% !important',
-      },
       '& .slider-frame': {
         overflow: 'visible !important',
       },
@@ -99,6 +95,7 @@ class VideoCarousel extends React.Component {
           cellAlign="center"
           cellSpacing={20}
           withoutControls
+          slidesToShow="2.25"
         >
           {videos.map(({ title, src, url, poster }, index) => (
             <PreviewVideo
